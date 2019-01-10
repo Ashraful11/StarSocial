@@ -20,12 +20,12 @@ class Post(models.Model):
     def __str__(self):
         return self.message
 
-    def save(*args, **kwargs):
+    def save(self, *args, **kwargs):
         self.message_html = misaka.html(self.message)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('post:single', kwargs={'username': self.user.username, 'pk': self.pk})
+        return reverse('posts:single', kwargs={'username': self.user.username, 'pk': self.pk})
 
     class Meta:
         ordering = ['-created_at']
